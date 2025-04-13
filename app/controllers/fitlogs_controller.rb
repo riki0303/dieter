@@ -1,7 +1,7 @@
 class FitlogsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @fitlogs = current_user.fitlogs.all
+    @fitlogs = current_user.fitlogs.all.order(created_at: :desc)
   end
 
   def new
@@ -38,7 +38,7 @@ class FitlogsController < ApplicationController
       redirect_to fitlogs_path, notice: "記録が削除されました"
     else
       flash.now[:alert] = "記録の削除に失敗しました"
-      render :index
+      render :edit, status: :unprocessable_entity
     end
   end
 
