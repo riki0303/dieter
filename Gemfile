@@ -43,10 +43,10 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # for form
-gem 'simple_form'
+gem "simple_form"
 
 # for haml
-gem 'haml-rails', '~> 2.0'
+gem "haml-rails", "~> 2.0"
 
 # for devise
 gem "devise", "~> 4.9"
@@ -67,7 +67,7 @@ group :development do
   gem "web-console"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'pry-rails'
+  gem "pry-rails"
 end
 
 group :test do

@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="188790d3-df85-464b-b759-99b30c5461b5" name="変更" comment="add: haml">
-      <change afterPath="$PROJECT_DIR$/app/models/fitlog.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/migrate/20250413085347_create_fitlogs.rb" afterDir="false" />
+    <list default="true" id="188790d3-df85-464b-b759-99b30c5461b5" name="変更" comment="add: migrate">
+      <change afterPath="$PROJECT_DIR$/app/controllers/fitlogs_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/helpers/fitlogs_helper.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/fitlogs/edit.html.haml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/fitlogs/index.html.haml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/fitlogs/new.html.haml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/fitlogs/show.html.haml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/controllers/fitlogs_controller_test.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dieter.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/fitlog.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/fitlog.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20250413085347_create_fitlogs.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20250413085347_create_fitlogs.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744531967901</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add: migrate">
+      <option name="closed" value="true" />
+      <created>1744535321960</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744535321960</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +205,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="add: simpleform" />
     <MESSAGE value="add: haml" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: haml" />
+    <MESSAGE value="add: migrate" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: migrate" />
   </component>
 </project>

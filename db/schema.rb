@@ -17,10 +17,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_085347) do
   create_table "fitlogs", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.decimal "weight", precision: 4, scale: 1, null: false, comment: "体重"
-    t.decimal "body_fat", precision: 4, scale: 1, comment: "体脂肪率"
+    t.decimal "body_fat", precision: 3, scale: 1, comment: "体脂肪率"
     t.decimal "muscle", precision: 4, scale: 1, comment: "筋肉量"
-    t.decimal "bmr", precision: 4, scale: 1, comment: "基礎代謝量"
-    t.decimal "body_age", precision: 4, scale: 1, comment: "体年齢"
+    t.decimal "bmr", precision: 5, scale: 1, comment: "基礎代謝量"
+    t.integer "body_age", comment: "体年齢"
     t.text "memo", comment: "メモ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
