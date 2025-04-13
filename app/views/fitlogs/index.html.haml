@@ -1,0 +1,26 @@
+.container
+  %h2 記録一覧
+  = link_to '新規記録', new_fitlog_path, class: 'btn btn-primary mb-3'
+  - if @fitlogs.any?
+    %table.table.table-striped
+      %thead
+        %tr
+          %th 日付
+          %th 体重(kg)
+          %th 体脂肪率(%)
+          %th 筋肉量(kg)
+          %th 基礎代謝量(kcal)
+          %th 体内年齢(歳)
+          %th メモ
+      %tbody
+        - @fitlogs.each do |fitlog|
+          %tr
+            %td= link_to fitlog.created_at.strftime('%Y/%m/%d'), edit_fitlog_path(fitlog)
+            %td= fitlog.weight
+            %td= fitlog.body_fat
+            %td= fitlog.muscle
+            %td= fitlog.bmr
+            %td= fitlog.body_age
+            %td= fitlog.memo
+  - else
+    %p 初めての記録をしてみましょう！

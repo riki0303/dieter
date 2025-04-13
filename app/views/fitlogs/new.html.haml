@@ -1,0 +1,17 @@
+.container
+  - if @fitlog.errors.any?
+    %ul
+      - @fitlog.errors.full_messages.each do |msg|
+        %li= msg
+
+  %h2 新規記録
+
+  = simple_form_for @fitlog do |f|
+    = f.input :weight, label: '体重(kg)', input_html: { class: 'form-control' }
+    = f.input :body_fat, label: '体脂肪率(%)', input_html: { class: 'form-control' }
+    = f.input :muscle, label: '筋肉量(kg)', input_html: { class: 'form-control' }
+    = f.input :bmr, label: '基礎代謝量(kcal)', input_html: { class: 'form-control' }
+    = f.input :body_age, label: '体内年齢(歳)', input_html: { class: 'form-control' }
+    = f.input :memo, label: 'メモ', input_html: { class: 'form-control' }
+
+    = f.button :submit, '記録する', class: 'btn btn-primary mt-3'
