@@ -1,0 +1,3 @@
+.container
+  = link_to '記録一覧ページ', fitlogs_path, class: 'btn btn-primary mb-3'
+  = line_chart @chart_data, title: '体重', xtitle: '日付', ytitle: '体重(kg)', height: '400px', width: '100%', library: { responsive: true }

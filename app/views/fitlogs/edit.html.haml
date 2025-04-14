@@ -14,5 +14,5 @@
     = f.input :body_age, label: '体内年齢(歳)', input_html: { class: 'form-control' }
     = f.input :memo, label: 'メモ', input_html: { class: 'form-control' }
 
-    = f.button :submit, '編集する', class: 'btn btn-primary mt-3'
+    = f.button :submit, '更新する', class: 'btn btn-primary mt-3'
     = link_to '削除', fitlog_path(@fitlog), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger mt-3'
