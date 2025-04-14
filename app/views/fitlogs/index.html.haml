@@ -17,7 +17,7 @@
       %tbody
         - @fitlogs.each do |fitlog|
           %tr
-            %td= link_to fitlog.created_at.strftime('%Y/%m/%d'), edit_fitlog_path(fitlog)
+            %td= link_to fitlog.record_at&.strftime('%Y/%m/%d'), edit_fitlog_path(fitlog)
             %td= fitlog.weight
             %td= fitlog.body_fat
             %td= fitlog.muscle

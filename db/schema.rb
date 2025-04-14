@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_121023) do
     t.text "memo", comment: "メモ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "record_at"
+    t.date "record_at", comment: "記録日"
     t.index ["user_id", "record_at"], name: "index_fitlogs_on_user_id_and_record_at", unique: true
     t.index ["user_id"], name: "index_fitlogs_on_user_id"
   end

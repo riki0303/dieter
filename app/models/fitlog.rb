@@ -9,5 +9,5 @@ class Fitlog < ApplicationRecord
   validates :memo, length: { maximum: 30 }, allow_nil: true
   validates :record_at, presence: true, uniqueness: { scope: :user_id }
 
-  scope :recent, -> { order(created_at: :desc).limit(14) }
+  scope :recent, -> { order(record_at: :desc).limit(14) }
 end
