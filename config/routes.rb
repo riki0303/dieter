@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   root "fitlogs#index"
-  resources :fitlogs, only: %w(index new create edit update destroy)
-  resource :mypage, only: %w(show)
+  resources :fitlogs, only: %w[index new create edit update destroy]
+  resource :mypage, only: %w[show]
 end

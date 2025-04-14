@@ -44,6 +44,6 @@ class FitlogsController < ApplicationController
 
   private
   def fitlog_params
-    params.require(:fitlog).permit(:record_at ,:weight, :body_fat, :muscle, :bmr, :body_age, :memo)
+    params.require(:fitlog).permit(:record_at, :weight, :body_fat, :muscle, :bmr, :body_age, :memo)
   end
 end
