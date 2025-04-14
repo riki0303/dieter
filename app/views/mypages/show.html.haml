@@ -1,0 +1,3 @@
+.container
+  %h2 体重推移グラフ
+  = line_chart @chart_data, title: '体重', xtitle: '日付', ytitle: '体重(kg)', height: '400px', width: '100%', library: { responsive: true }

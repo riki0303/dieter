@@ -1,6 +1,7 @@
 .container
   %h2 記録一覧
   = link_to '新規記録', new_fitlog_path, class: 'btn btn-primary mb-3'
+  = link_to 'マイページ', mypage_path, class: 'btn btn-secondary mb-3'
   - if @fitlogs.any?
     %table.table.table-striped
       %thead

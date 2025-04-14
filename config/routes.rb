@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   root "fitlogs#index"
   resources :fitlogs
+  resource :mypage, only: %w(show)
 end
