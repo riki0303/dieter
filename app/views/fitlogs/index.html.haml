@@ -26,3 +26,5 @@
             %td= fitlog.memo
   - else
     %p 初めての記録をしてみましょう！
+
+  = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-danger mt-3'
