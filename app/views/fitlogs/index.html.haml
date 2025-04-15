@@ -2,7 +2,6 @@
   %h2.text-center 記録一覧
   .text-end
     = link_to '新規記録', new_fitlog_path, class: 'btn btn-primary mb-3'
-    = link_to 'マイページ', mypage_path, class: 'btn btn-secondary mb-3'
   - if @fitlogs.any?
     %table.table.table-striped
       %thead
@@ -26,5 +25,3 @@
             %td= fitlog.memo
   - else
     %p 初めての記録をしてみましょう！
-
-  = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-danger mt-3'

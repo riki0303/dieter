@@ -1,0 +1,20 @@
+%header
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
+    .container
+      = link_to "Dieter", root_path, class: "navbar-brand"
+      %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", :data => { "bs-toggle" => "collapse", "bs-target" => "#navbarNav" }, :type => "button"}
+        %span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
+        %ul.navbar-nav
+          - if user_signed_in?
+            %li.nav-item
+              = link_to 'マイページ', mypage_path, class: 'nav-link'
+            %li.nav-item
+              = link_to '記録一覧', fitlogs_path, class: 'nav-link'
+            %li.nav-item
+              = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'nav-link'
+          - else
+            %li.nav-item
+              = link_to '新規登録', new_user_registration_path, class: 'nav-link'
+            %li.nav-item
+              = link_to 'ログイン', new_user_session_path, class: 'nav-link'
