@@ -1,7 +1,7 @@
 class FitlogsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @fitlogs = current_user.fitlogs.all.order(created_at: :desc)
+    @fitlogs = current_user.fitlogs.all.order(record_at: :desc)
   end
 
   def new
@@ -11,9 +11,9 @@ class FitlogsController < ApplicationController
   def create
     @fitlog = current_user.fitlogs.new(fitlog_params)
     if @fitlog.save
-      redirect_to fitlogs_path, notice: "記録が保存出来ました"
+      redirect_to fitlogs_path, notice: t('create.notice')
     else
-      flash.now[:alert] = "記録の保存に失敗しました"
+      flash.now[:alert] = t('create.alert')
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,9 +25,9 @@ class FitlogsController < ApplicationController
   def update
     @fitlog = current_user.fitlogs.find(params[:id])
     if @fitlog.update(fitlog_params)
-      redirect_to fitlogs_path, notice: "記録が更新されました"
+      redirect_to fitlogs_path, notice: t('update.notice')
     else
-      flash.now[:alert] = "記録の更新に失敗しました"
+      flash.now[:alert] = t('update.alert')
       render :edit, status: :unprocessable_entity
     end
   end

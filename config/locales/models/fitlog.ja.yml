@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      fitlog:
+        weight: '体重'
+        body_fat: '体脂肪率'
+        muscle: '筋肉量'
+        bmr: '基礎代謝量'
+        body_age: '体内年齢'
+        memo: 'メモ'
+        record_at: '記録日'
