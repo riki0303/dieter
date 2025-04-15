@@ -1,7 +1,7 @@
 class FitlogsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @fitlogs = current_user.fitlogs.all.order(created_at: :desc)
+    @fitlogs = current_user.fitlogs.all.order(record_at: :desc)
   end
 
   def new
