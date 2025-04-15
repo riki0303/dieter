@@ -35,9 +35,9 @@ class FitlogsController < ApplicationController
   def destroy
     @fitlog = current_user.fitlogs.find(params[:id])
     if @fitlog.destroy
-      redirect_to fitlogs_path, notice: "記録が削除されました"
+      redirect_to fitlogs_path, notice: '記録が削除されました'
     else
-      flash.now[:alert] = "記録の削除に失敗しました"
+      flash.now[:alert] = '記録の削除に失敗しました'
       render :edit, status: :unprocessable_entity
     end
   end
