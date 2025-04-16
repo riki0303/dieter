@@ -19,5 +19,6 @@
       %p.notice.alert.alert-primary= flash[:notice]
     - if flash[:alert]
       %p.alert.alert-warning= flash[:alert]
-    = render 'layouts/header'
+    - if user_signed_in?
+      = render 'layouts/header'
     = yield
