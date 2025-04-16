@@ -3,8 +3,6 @@
     %ul
       - @fitlog.errors.full_messages.each do |msg|
         %li= msg
-  .text-end
-    = link_to '記録一覧', fitlogs_path, class: 'btn btn-primary mb-3'
   %h2.text-center 記録編集
 
   = render 'form', fitlog: @fitlog

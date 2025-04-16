@@ -1,10 +1,16 @@
 = simple_form_for fitlog do |f|
-  = f.input :record_at, label: '日付', as: :date, input_html: { class: 'mb-2' }
-  = f.input :weight, label: '体重(kg)', input_html: { class: 'form-control' }
-  = f.input :body_fat, label: '体脂肪率(%)', input_html: { class: 'form-control' }
-  = f.input :muscle, label: '筋肉量(kg)', input_html: { class: 'form-control' }
-  = f.input :bmr, label: '基礎代謝量(kcal)', input_html: { class: 'form-control' }
-  = f.input :body_age, label: '体内年齢(歳)', input_html: { class: 'form-control' }
-  = f.input :memo, label: 'メモ', input_html: { class: 'form-control' }
+  = f.input :record_at, label: '日付', as: :date, html5: true, input_html: { class: 'd-block' }
+  .mt-2
+    = f.input :weight, label: '体重(kg)', input_html: { class: 'form-control' }
+  .mt-2
+    = f.input :body_fat, label: '体脂肪率(%)', input_html: { class: 'form-control' }
+  .mt-2
+    = f.input :muscle, label: '筋肉量(kg)', input_html: { class: 'form-control' }
+  .mt-2
+    = f.input :bmr, label: '基礎代謝量(kcal)', input_html: { class: 'form-control' }
+  .mt-2
+    = f.input :body_age, label: '体内年齢(歳)', input_html: { class: 'form-control' }
+  .mt-2
+    = f.input :memo, label: 'メモ', input_html: { class: 'form-control' }
 
   = f.button :submit, '記録する', class: 'btn btn-primary mt-3'
