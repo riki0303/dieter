@@ -1,5 +1,5 @@
 class MypagesController < ApplicationController
-  before_action :authenticate_user!, only: %i{ show }
+  before_action :authenticate_user!, only: %i[ show ]
   def show
     # グラフの表示のためにreverse
     @fitlogs = current_user.fitlogs.recent.reverse
