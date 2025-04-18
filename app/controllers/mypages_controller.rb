@@ -3,6 +3,8 @@ class MypagesController < ApplicationController
   def show
     # グラフの表示のためにreverse
     @fitlogs = current_user.fitlogs.recent.reverse
+    return if @fitlogs.blank?
+
     @chart_data = @fitlogs.map do |fitlog|
       date = fitlog.record_at.strftime('%-m/%-d')  # 例: "4/13"
       [ date, fitlog.weight ]
