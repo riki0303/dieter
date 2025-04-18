@@ -1,3 +1,6 @@
 .container
   %h2.text-center マイページ
-  = line_chart @chart_data, title: '体重', xtitle: '日付', ytitle: '体重(kg)', min: min_weight(@chart_data) - 5, max: max_weight(@chart_data) + 5, height: '400px', width: '100%', library: { responsive: true }
+  - if @chart_data
+    = line_chart @chart_data, title: '体重', xtitle: '日付', ytitle: '体重(kg)', min: min_weight(@chart_data) - 5, max: max_weight(@chart_data) + 5, height: '400px', width: '100%', library: { responsive: true }
+  - else
+    %p データがありません。体重を記録してみましょう！
