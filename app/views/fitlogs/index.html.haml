@@ -3,25 +3,26 @@
   .text-end
     = link_to '新規記録', new_fitlog_path, class: 'btn btn-primary mb-3'
   - if @fitlogs.any?
-    %table.table.table-striped
-      %thead
-        %tr
-          %th 日付
-          %th 体重(kg)
-          %th 体脂肪率(%)
-          %th 筋肉量(kg)
-          %th 基礎代謝量(kcal)
-          %th 体内年齢(歳)
-          %th メモ
-      %tbody
-        - @fitlogs.each do |fitlog|
+    .table-responsive
+      %table.table.table-striped
+        %thead
           %tr
-            %td= link_to fitlog.record_at&.strftime('%Y/%m/%d'), edit_fitlog_path(fitlog)
-            %td= fitlog.weight
-            %td= fitlog.body_fat
-            %td= fitlog.muscle
-            %td= fitlog.bmr
-            %td= fitlog.body_age
-            %td= fitlog.memo
+            %th.text-nowrap 日付
+            %th.text-nowrap 体重(kg)
+            %th.text-nowrap 体脂肪率(%)
+            %th.text-nowrap 筋肉量(kg)
+            %th.text-nowrap 基礎代謝量(kcal)
+            %th.text-nowrap 体内年齢(歳)
+            %th.text-nowrap{ style: "min-width: 100px;" } メモ
+        %tbody
+          - @fitlogs.each do |fitlog|
+            %tr
+              %td= link_to l(fitlog.record_at, format: :short), edit_fitlog_path(fitlog)
+              %td= fitlog.weight
+              %td= fitlog.body_fat
+              %td= fitlog.muscle
+              %td= fitlog.bmr
+              %td= fitlog.body_age
+              %td{ style: "min-width: 100px;" }= fitlog.memo
   - else
     %p 初めての記録をしてみましょう！
