@@ -1,7 +1,7 @@
 class FitlogsController < ApplicationController
   before_action :authenticate_user!, only: %i[ index new create edit update destroy ]
   def index
-    @fitlogs = current_user.fitlogs.all.order(record_at: :desc)
+    @fitlogs = current_user.fitlogs.all.order(record_at: :desc).page(params[:page])
   end
 
   def new
