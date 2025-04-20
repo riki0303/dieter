@@ -24,5 +24,7 @@
               %td= fitlog.bmr
               %td= fitlog.body_age
               %td{ style: "min-width: 100px;" }= fitlog.memo
+    = paginate @fitlogs , theme: 'bootstrap-5', previous_label: '前のページ', next_label: '次のページ', nav_class: 'pagination justify-content-center'
   - else
     %p 初めての記録をしてみましょう！
+

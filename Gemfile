@@ -48,6 +48,8 @@ gem 'haml-rails', '~> 2.0'
 gem 'chartkick'
 gem 'rails-i18n', '~> 8.0.0'
 gem 'html2haml'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
 
 # for devise
 gem 'devise', '~> 4.9'
