@@ -1,5 +1,5 @@
 = simple_form_for fitlog do |f|
-  = f.input :record_at, label: '日付', as: :date, html5: true, input_html: { class: 'd-block form-control' }
+  = f.input :record_at, label: '日付', as: :date, html5: true, input_html: { class: 'd-block form-control', onclick: 'this.showPicker()' }
   .mt-2
     = f.input :weight, label: '体重(kg)', input_html: { class: 'form-control' }
   .mt-2
