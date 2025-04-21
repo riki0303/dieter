@@ -1,6 +1,7 @@
-class MypagesController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[ show ]
   def show
+    @profile = current_user.profile
     # グラフの表示のためにreverse
     @fitlogs = current_user.fitlogs.recent.reverse
     return if @fitlogs.blank?
