@@ -5,11 +5,11 @@ class FitlogsController < ApplicationController
   end
 
   def new
-    @fitlog = current_user.fitlogs.new
+    @fitlog = current_user.fitlogs.build
   end
 
   def create
-    @fitlog = current_user.fitlogs.new(fitlog_params)
+    @fitlog = current_user.build_fitlog(fitlog_params)
     if @fitlog.save
       redirect_to fitlogs_path, notice: t('create.notice')
     else
