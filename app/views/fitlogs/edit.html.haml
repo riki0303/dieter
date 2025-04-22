@@ -6,4 +6,4 @@
   %h2.text-center 記録編集
 
   = render 'form', fitlog: @fitlog
-  = link_to '削除する', fitlog_path(@fitlog), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger mt-3'
+  = link_to '削除', fitlog_path(@fitlog), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger mt-3'

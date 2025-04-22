@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+        profile:
+            name: '名前'
+            height: '身長'
+            target_weight: '目標体重'

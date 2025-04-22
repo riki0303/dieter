@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   root 'fitlogs#index'
   resources :fitlogs, only: %w[index new create edit update destroy]
-  resource :mypage, only: %w[show]
+  resource :profile, only: %w[show edit update]
+  resource :chart, only: %w[show]
 end
