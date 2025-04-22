@@ -1,2 +1,99 @@
-.container
-  %h2.text-center マイページ
+.container.py-4
+  - if @profile.present?
+    .row.justify-content-center
+      .col-lg-10
+        .card.shadow-sm.border-0.rounded-3.overflow-hidden
+          .card-header.bg-gradient.p-3.d-flex.justify-content-between.align-items-center{style: "background-color: #4e73df; color: white;"}
+            %h4.mb-0 プロフィール
+            = link_to edit_profile_path, class: 'btn btn-light btn-sm' do
+              %i.bi.bi-pencil
+              編集
+          
+          .card-body.p-0
+            .row.g-0
+              .col-md-4.p-4.text-center.border-end
+                .avatar-circle.mx-auto.mb-3.d-flex.align-items-center.justify-content-center{style: "width: 120px; height: 120px; background-color: #f8f9fa; border-radius: 50%;"}
+                  %i.bi.bi-person.text-primary{style: "font-size: 4rem;"}
+                %h5.fw-bold= @profile.name.presence || "名前未設定"
+                
+              .col-md-8
+                .row.g-0.h-100
+                  .col-md-4.p-4.text-center.border-end.d-flex.flex-column.justify-content-center
+                    %i.bi.bi-rulers.mb-2.text-primary{style: "font-size: 2rem;"}
+                    %h6.text-muted 身長
+                    - if @profile.height.present?
+                      .d-flex.align-items-center.justify-content-center
+                        %span.fw-bold.fs-3= @profile.height
+                        %span.text-muted.ms-1 cm
+                    - else
+                      %p.text-muted 未設定
+                  
+                  .col-md-4.p-4.text-center.border-end.d-flex.flex-column.justify-content-center
+                    %i.bi.bi-speedometer2.mb-2.text-primary{style: "font-size: 2rem;"}
+                    %h6.text-muted 現在の体重
+                    - if @weight.present?
+                      .d-flex.align-items-center.justify-content-center
+                        %span.fw-bold.fs-3= @weight
+                        %span.text-muted.ms-1 kg
+                    - else
+                      %p.text-muted 未設定
+                  
+                  .col-md-4.p-4.text-center.d-flex.flex-column.justify-content-center
+                    %i.bi.bi-bullseye.mb-2.text-primary{style: "font-size: 2rem;"}
+                    %h6.text-muted 目標体重
+                    - if @profile.target_weight.present?
+                      .d-flex.align-items-center.justify-content-center
+                        %span.fw-bold.fs-3= @profile.target_weight
+                        %span.text-muted.ms-1 kg
+                    - else
+                      %p.text-muted 未設定
+        
+        - if @profile.height.present? && @weight.present? && @profile.target_weight.present?
+          .row.mt-4
+            .col-md-6.mb-3.mb-md-0
+              .card.shadow-sm.border-0.rounded-3.h-100
+                .card-body.p-4.text-center
+                  %h5.card-title
+                    %i.bi.bi-calculator.me-2.text-primary
+                    BMI指数
+                  - bmi(@weight, @profile.height)
+                  %div.my-3
+                    %span.display-4.fw-bold{class: bmi_color(bmi(@weight, @profile.height))}= bmi(@weight, @profile.height)
+                  
+                  %span.badge.px-3.py-2.fs-6{class: bmi_status((bmi(@weight, @profile.height)))[1]}= bmi_status(bmi(@weight, @profile.height))[0]
+            
+            .col-md-6
+              .card.shadow-sm.border-0.rounded-3.h-100
+                .card-body.p-4.text-center
+                  %h5.card-title
+                    %i.bi.bi-arrow-down-up.me-2.text-primary
+                    目標までの差
+                  - weight_diff = (@weight - @profile.target_weight).round(1).abs
+                  - if @weight > @profile.target_weight
+                    .my-3
+                      %span.display-4.fw-bold.text-danger= weight_diff
+                      %span.text-muted kg 減量
+                    .progress.mt-2{style: "height: 10px;"}
+                      .progress-bar.bg-danger{style: "width: #{progress_down(@profile.target_weight, @weight)}%"}
+                  - elsif @weight < @profile.target_weight
+                    .my-3
+                      %span.display-4.fw-bold.text-warning= weight_diff
+                      %span.text-muted kg 増量
+                    .progress.mt-2{style: "height: 10px;"}
+                      .progress-bar.bg-warning{style: "width: #{progress_up(@weight, @profile.target_weight)}%"}
+                  - else
+                    .my-3
+                      %span.display-4.fw-bold.text-success 0
+                      %span.text-muted kg
+                    %p.mt-2.mb-0.badge.bg-success.px-3.py-2 目標達成！
+  - else
+    .row.justify-content-center
+      .col-md-8
+        .card.shadow-sm.border-0.rounded-3.p-5.text-center
+          %i.bi.bi-exclamation-diamond.text-warning{style: "font-size: 4rem;"}
+          %h3.mt-3 プロフィールが未設定です
+          %p.text-muted.mb-4 健康管理をより効果的に行うために、プロフィール情報を登録しましょう。
+          = link_to edit_profile_path, class: 'btn btn-primary btn-lg px-4' do
+            %i.bi.bi-person-plus.me-2
+            プロフィールを設定する
+

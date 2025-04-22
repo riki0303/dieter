@@ -1,0 +1,51 @@
+.container.py-5
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card.shadow-lg.border-0.rounded-4
+        .card-header.bg-gradient.p-4.text-center{style: "background-color: #4361ee; color: white;"}
+          %h3.fw-bold
+            %i.bi.bi-person-gear.me-2
+            プロフィール設定
+
+        .card-body.p-4
+          - if @profile.errors.any?
+            .alert.alert-danger.rounded-3.mb-4
+              %h5.alert-heading
+                %i.bi.bi-exclamation-triangle-fill.me-2
+                入力内容に問題があります
+              %ul.mb-0.ps-3
+                - @profile.errors.full_messages.each do |msg|
+                  %li= msg
+
+          = simple_form_for @profile, url: profile_path, method: :patch do |f|
+            .mb-4
+              = f.label :name do
+                %i.bi.bi-person-fill.me-2
+                あなたの名前
+              = f.input :name, label: false, input_html: { class: 'form-control shadow-sm rounded-3' }
+              %small.form-text.text-muted マイページに表示される名前です
+
+            .mb-4
+              = f.label :height do
+                %i.bi.bi-rulers.me-2
+                身長 (cm)
+              = f.input :height, label: false, input_html: { class: 'form-control shadow-sm rounded-3' }
+              %small.form-text.text-muted BMIの計算などに使用されます
+
+            .mb-4
+              = f.label :target_weight do
+                %i.bi.bi-bullseye.me-2
+                目標体重 (kg)
+              = f.input :target_weight, label: false, input_html: { class: 'form-control shadow-sm rounded-3' }
+              %small.form-text.text-muted あなたが目指す理想的な体重を設定してください
+
+            .d-flex.justify-content-between.align-items-center.mt-4
+              = link_to profile_path, class: 'btn btn-outline-secondary rounded-3' do
+                %i.bi.bi-arrow-left.me-2
+                戻る
+              = f.button :submit, '保存する', class: 'btn btn-primary rounded-3 px-4'
+
+        .card-footer.bg-light.text-center.p-3
+          %small.text-muted
+            %i.bi.bi-shield-lock.me-1
+            プロフィール情報は他のユーザーには公開されません
