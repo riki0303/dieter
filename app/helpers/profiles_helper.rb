@@ -2,13 +2,13 @@ module ProfilesHelper
   def bmi_color(bmi)
     case bmi
     when 0..18.4
-      "text-info"
+      'text-info'
     when 18.5..24.9
-      "text-success"
+      'text-success'
     when 25..29.9
-      "text-warning"
+      'text-warning'
     else
-      "text-danger"
+      'text-danger'
     end
   end
 
@@ -19,11 +19,11 @@ module ProfilesHelper
   def bmi_status(bmi)
     case bmi
     when 0..18.4
-      ["低体重", "bg-info"]
+      ['低体重', 'bg-info']
     when 18.5..24.9
-      ["標準", "bg-success"]
-      else
-      ["過体重", "bg-warning"]
+      ['標準', 'bg-success']
+    else
+      ['過体重', 'bg-warning']
     end
   end
 
