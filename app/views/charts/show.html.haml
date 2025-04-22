@@ -1,5 +1,54 @@
-.container
-  - if @chart_data
-    = line_chart @chart_data, title: '体重', xtitle: '日付', ytitle: '体重(kg)', min: min_weight(@chart_data) - 5, max: max_weight(@chart_data) + 5, height: '400px', width: '100%', library: { responsive: true }
-  - else
-    %p データがありません。体重を記録してみましょう！
+.container.py-4
+  .row.justify-content-center
+    .col-lg-10
+      .card.shadow-sm.border-0.rounded-3.mb-4
+        .card-header.bg-gradient.p-3.d-flex.justify-content-between.align-items-center{style: "background-color: #4e73df; color: white;"}
+          %h4.mb-0
+            %i.bi.bi-graph-up.me-2
+            体重の推移
+        
+        .card-body.p-4
+          - if @chart_data
+            .chart-container.position-relative{style: "min-height: 400px;"}
+              = line_chart @chart_data, xtitle: '日付', ytitle: '体重(kg)', min: min_weight(@chart_data) - 5, max: max_weight(@chart_data) + 5, height: '400px', width: '100%', library: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, elements: { line: { tension: 0.4, borderWidth: 3 }, point: { radius: 4, hitRadius: 10, hoverRadius: 6 } } }
+          - else
+            .alert.alert-info.d-flex.align-items-center.mb-0
+              %i.bi.bi-exclamation-circle-fill.me-2.fs-4
+              .d-flex.flex-column
+                %strong データがありません
+                %span 体重を記録することで、ここにグラフが表示されます。
+                = link_to new_fitlog_path, class: 'btn btn-primary mt-3' do
+                  %i.bi.bi-plus-circle.me-2
+                  体重を記録する
+      
+      - if @chart_data
+        .row.gx-2.gy-3
+          .col-4
+            .card.border-0.shadow-sm.rounded-3.h-100
+              .card-body.p-2.p-sm-3.text-center
+                %i.bi.bi-arrow-up-circle.text-success.d-block.mb-2{class: "fs-3 fs-sm-1"}
+                %h5.card-title.fs-6.fs-sm-5 最高体重
+                .weight-display.fw-bold
+                  %span.fs-4= max_weight(@chart_data)
+                  %span.text-muted.ms-1 kg
+          
+          .col-4
+            .card.border-0.shadow-sm.rounded-3.h-100
+              .card-body.p-2.p-sm-3.text-center
+                %i.bi.bi-arrow-down-circle.text-danger.d-block.mb-2{class: "fs-3 fs-sm-1"}
+                %h5.card-title.fs-6.fs-sm-5 最低体重
+                .weight-display.fw-bold
+                  %span.fs-4= min_weight(@chart_data)
+                  %span.text-muted.ms-1 kg
+          
+          .col-4
+            .card.border-0.shadow-sm.rounded-3.h-100
+              .card-body.p-2.p-sm-3.text-center
+                %i.bi.bi-calculator.text-primary.d-block.mb-2{class: "fs-3 fs-sm-1"}
+                %h5.card-title.fs-6.fs-sm-5 平均体重
+                - if @chart_data.any?
+                  .weight-display.fw-bold
+                    %span.fs-4= average_weight(@chart_data).round(1)
+                    %span.text-muted.ms-1 kg
+                - else
+                  %p.text-muted 計算不可
