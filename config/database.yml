@@ -83,6 +83,7 @@ production:
     <<: *default
     database: dieter_production
     username: dieter
+    url: <%= ENV['DATABASE_URL'] %>
     password: <%= ENV["DIETER_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
