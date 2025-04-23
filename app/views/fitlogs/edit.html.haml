@@ -1,9 +1,19 @@
-.container
-  - if @fitlog.errors.any?
-    %ul
-      - @fitlog.errors.full_messages.each do |msg|
-        %li= msg
-  %h2.text-center 記録編集
+.container.py-4
+  .row.justify-content-center
+    .col-lg-8
+      .card.shadow-sm.border-0.rounded-3
+        .card-header.bg-gradient.p-3{style: "background-color: #4e73df; color: white;"}
+          %h4.mb-0
+            %i.bi.bi-pencil-square.me-2
+            記録編集
 
-  = render 'form', fitlog: @fitlog
-  = link_to '削除', fitlog_path(@fitlog), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger mt-3'
+        .card-body.p-4
+          - if @fitlog.errors.any?
+            .alert.alert-danger.mb-4
+              %h6.alert-heading
+                %i.bi.bi-exclamation-triangle-fill.me-2
+                入力内容にエラーがあります
+              %ul.mb-0.ps-3.mt-2
+                - @fitlog.errors.full_messages.each do |msg|
+                  %li= msg
+          = render 'form', fitlog: @fitlog

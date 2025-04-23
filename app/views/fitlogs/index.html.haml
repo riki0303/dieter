@@ -1,30 +1,92 @@
-.container
-  %h2.text-center 記録一覧
-  .text-end
-    = link_to '新規記録', new_fitlog_path, class: 'btn btn-primary mb-3'
-  - if @fitlogs.any?
-    .table-responsive
-      %table.table.table-striped
-        %thead
-          %tr
-            %th.text-nowrap 日付
-            %th.text-nowrap 体重(kg)
-            %th.text-nowrap 体脂肪率(%)
-            %th.text-nowrap 筋肉量(kg)
-            %th.text-nowrap 基礎代謝量(kcal)
-            %th.text-nowrap 体内年齢(歳)
-            %th.text-nowrap{ style: "min-width: 100px;" } メモ
-        %tbody
-          - @fitlogs.each do |fitlog|
-            %tr
-              %td= link_to l(fitlog.record_at, format: :short), edit_fitlog_path(fitlog)
-              %td= fitlog.weight
-              %td= fitlog.body_fat
-              %td= fitlog.muscle
-              %td= fitlog.bmr
-              %td= fitlog.body_age
-              %td{ style: "min-width: 100px;" }= fitlog.memo
-    = paginate @fitlogs , theme: 'bootstrap-5', previous_label: '前のページ', next_label: '次のページ', nav_class: 'pagination justify-content-center'
-  - else
-    %p 初めての記録をしてみましょう！
+.container.py-4
+  .card.shadow-sm.border-0.rounded-3.mb-4
+    .card-header.bg-gradient.p-3.d-flex.justify-content-between.align-items-center{style: "background-color: #4e73df; color: white;"}
+      %h4.mb-0
+        %i.bi.bi-journal-text.me-2
+        記録一覧
+      = link_to new_fitlog_path, class: 'btn btn-light' do
+        %i.bi.bi-plus-lg.me-1
+        新規記録
 
+    - if @fitlogs.any?
+      .card-body.p-3
+        .row.row-cols-1.row-cols-lg-3.g-3
+          - @fitlogs.each do |fitlog|
+            .col
+              .card.h-100.border-0.shadow-sm.rounded-3
+                .card-header.bg-light.p-3.d-flex.justify-content-between.align-items-center
+                  .d-flex.align-items-center
+                    .rounded-icon.bg-primary.text-white.d-flex.align-items-center.justify-content-center.me-2{style: "width: 36px; height: 36px;"}
+                      %i.bi.bi-calendar-event
+                    %h6.mb-0.fw-bold= l(fitlog.record_at, format: :long)
+                  .actions
+                    = link_to edit_fitlog_path(fitlog), class: 'btn btn-sm btn-outline-primary me-1', title: '編集' do
+                      %i.bi.bi-pencil
+                    = link_to fitlog_path(fitlog), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-sm btn-outline-danger', title: '削除' do
+                      %i.bi.bi-trash
+
+                .card-body.p-3
+                  .weight-display.text-center.mb-3
+                    .fs-6.text-muted 体重
+                    .d-flex.align-items-center.justify-content-center
+                      %span.fw-bold.fs-1.text-primary= fitlog.weight
+                      %span.text-muted.ms-1.mt-2 kg
+
+                  .row.row-cols-2.g-2.mb-3
+                    .col
+                      .data-item.bg-light.rounded.p-2.h-100
+                        .small.text-muted.mb-1 体脂肪率
+                        - if fitlog.body_fat.present?
+                          .d-flex.align-items-baseline
+                            %span.fw-bold.fs-5= fitlog.body_fat
+                            %span.text-muted.ms-1 %
+                        - else
+                          %span.text-muted —
+
+                    .col
+                      .data-item.bg-light.rounded.p-2.h-100
+                        .small.text-muted.mb-1 筋肉量
+                        - if fitlog.muscle.present?
+                          .d-flex.align-items-baseline
+                            %span.fw-bold.fs-5= fitlog.muscle
+                            %span.text-muted.ms-1 kg
+                        - else
+                          %span.text-muted —
+
+                    .col
+                      .data-item.bg-light.rounded.p-2.h-100
+                        .small.text-muted.mb-1 基礎代謝量
+                        - if fitlog.bmr.present?
+                          .d-flex.align-items-baseline
+                            %span.fw-bold.fs-5= fitlog.bmr
+                            %span.text-muted.ms-1 kcal
+                        - else
+                          %span.text-muted —
+
+                    .col
+                      .data-item.bg-light.rounded.p-2.h-100
+                        .small.text-muted.mb-1 体内年齢
+                        - if fitlog.body_age.present?
+                          .d-flex.align-items-baseline
+                            %span.fw-bold.fs-5= fitlog.body_age
+                            %span.text-muted.ms-1 歳
+                        - else
+                          %span.text-muted —
+
+                - if fitlog.memo.present?
+                  .card-footer.bg-white.border-top.p-3
+                    .d-flex.align-items-start
+                      %i.bi.bi-sticky.text-muted.me-2.mt-1
+                      .memo-text.small= fitlog.memo
+
+      .card-footer.bg-white.py-3
+        = paginate @fitlogs, theme: 'bootstrap-5', previous_label: '前のページ', next_label: '次のページ', nav_class: 'pagination justify-content-center mb-0'
+    - else
+      .card-body.py-5
+        .text-center
+          %i.bi.bi-clipboard-plus.text-muted{style: "font-size: 4rem;"}
+          %h5.mt-3.mb-2 まだ記録がありません
+          %p.text-muted.mb-4 健康管理を始めるために、最初の記録をつけましょう
+          = link_to new_fitlog_path, class: 'btn btn-primary btn-lg px-4' do
+            %i.bi.bi-plus-circle.me-2
+            最初の記録をつける
