@@ -1,26 +1,85 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-    = f.input :password,
-      hint: "leave it blank if you don't want to change it",
-      required: false,
-      input_html: { autocomplete: "new-password" }
-    = f.input :password_confirmation,
-      required: false,
-      input_html: { autocomplete: "new-password" }
-    = f.input :current_password,
-      hint: "we need your current password to confirm your changes",
-      required: true,
-      input_html: { autocomplete: "current-password" }
-  .form-actions
-    = f.button :submit, "Update"
-%h3 Cancel my account
-%div
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+.container.py-5
+  .row.justify-content-center
+    .col-lg-8
+      .card.border-0.shadow-lg.rounded-4.overflow-hidden
+        .card-header.bg-gradient.p-4{style: "background-color: #4e73df; color: white;"}
+          %h4.fw-bold.mb-0
+            %i.bi.bi-gear-fill.me-2
+            アカウント設定
+        
+        .card-body.p-4.p-lg-5
+          - if resource.errors.any?
+            .alert.alert-danger.mb-4
+              %h6.alert-heading
+                %i.bi.bi-exclamation-triangle-fill.me-2
+                入力内容にエラーがあります
+              %ul.mb-0.ps-3.mt-2
+                - resource.errors.full_messages.each do |msg|
+                  %li= msg
+
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation", novalidate: true }) do |f|
+            .row.g-3
+              .col-12.mb-3
+                %label.text-muted{for: "email-input"}
+                  %i.bi.bi-envelope.me-1
+                  メールアドレス
+                = f.input :email,
+                  required: false,
+                  autofocus: true,
+                  label: false,
+                  input_html: { autocomplete: "email", class: "form-control rounded-3 mt-1", id: "email-input" }
+              
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                .col-12.mb-3
+                  .alert.alert-info
+                    %i.bi.bi-info-circle.me-2
+                    以下のアドレスの確認待ち: #{resource.unconfirmed_email}
+              
+              .col-12.mb-3
+                %label.text-muted{for: "password-input"}
+                %i.bi.bi-key.me-1
+                新しいパスワード
+                = f.input :password,
+                  required: false,
+                  label: false,
+                  input_html: { autocomplete: "current-password", class: "form-control rounded-3 mt-1", id: "password-input" }
+              
+              .col-12.mb-3
+                %label.text-muted{for: "password-input"}
+                %i.bi.bi-key.me-1
+                パスワード再入力
+                = f.input :password_confirmation,
+                  required: false,
+                  label: false,
+                  input_html: { autocomplete: "current-password", class: "form-control rounded-3 mt-1", id: "password-input" }
+              
+              .col-12.mb-4
+                %label.text-danger 現在のパスワード（必須）
+                = f.input :current_password,
+                  required: true,
+                  label: false,
+                  input_html: { autocomplete: "current-password", class: "form-control" }
+              
+              .d-grid.gap-2.d-md-flex.justify-content-md-end.mt-3
+                = link_to :back, class: "btn btn-outline-secondary me-md-2" do
+                  %i.bi.bi-arrow-left.me-1
+                  戻る
+                = f.button :submit, "更新する", class: "btn btn-primary px-4"
+      
+      .card.border-0.shadow-lg.rounded-4.overflow-hidden.mt-4
+        .card-header.bg-gradient.p-3{style: "background-color: #dc3545; color: white;"}
+          %h5.fw-bold.mb-0
+            %i.bi.bi-exclamation-triangle.me-2
+            アカウント削除
+        
+        .card-body.p-4
+          .d-flex.align-items-center
+            %i.bi.bi-shield-exclamation.text-danger.me-3{style: "font-size: 2rem;"}
+            .content
+              %p.mb-3 アカウントを削除すると、すべてのデータが完全に削除され、復元できなくなります。
+              = button_to registration_path(resource_name), 
+                data: { turbo_confirm: "本当にアカウントを削除しますか？この操作は取り消せません。" }, 
+                method: :delete, 
+                class: "btn btn-outline-danger" do
+                %i.bi.bi-trash.me-1
+                アカウントを削除する
