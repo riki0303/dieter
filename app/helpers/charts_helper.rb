@@ -6,7 +6,7 @@ module ChartsHelper
   def max_weight(chart_data)
     chart_data.map(&:last).max
   end
-  
+
   def average_weight(chart_data)
     weights = chart_data.map(&:last)
     weights.sum / weights.size.to_f
