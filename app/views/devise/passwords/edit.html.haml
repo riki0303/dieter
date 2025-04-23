@@ -1,19 +1,55 @@
-%h2 Change your password
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
-  .form-inputs
-    = f.input :password,
-      label: "New password",
-      required: true,
-      autofocus: true,
-      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-      input_html: { autocomplete: "new-password" }
-    = f.input :password_confirmation,
-      label: "Confirm your new password",
-      required: true,
-      input_html: { autocomplete: "new-password" }
-  .form-actions
-    = f.button :submit, "Change my password"
-= render "devise/shared/links"
+.container.py-5
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card.border-0.shadow-lg.rounded-4.overflow-hidden
+        .card-header.bg-gradient.p-4.text-center{style: "background-color: #4e73df;"}
+          %h1.text-white.mb-0.fw-bold 
+            %i.bi.bi-shield-lock.me-2
+            パスワード変更
+        
+        .card-body.p-4.p-lg-5
+          - if resource.errors.any?
+            .alert.alert-danger.mb-4
+              %h6.alert-heading
+                %i.bi.bi-exclamation-triangle-fill.me-2
+                入力内容にエラーがあります
+              %ul.mb-0.ps-3.mt-2
+                - resource.errors.full_messages.each do |msg|
+                  %li= msg
+          
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "needs-validation", novalidate: true }) do |f|
+            = f.input :reset_password_token, as: :hidden
+            = f.full_error :reset_password_token
+            
+            .mb-4
+              .input-group
+                %span.input-group-text.bg-light.border-end-0
+                  %i.bi.bi-lock.text-muted
+                = f.input :password,
+                  label: "新しいパスワード",
+                  required: true,
+                  autofocus: true,
+                  placeholder: "新しいパスワードを入力",
+                  hint: (@minimum_password_length ? "#{@minimum_password_length} 文字以上で設定してください" : nil),
+                  input_html: { autocomplete: "new-password", class: "form-control border-start-0" }
+            
+            .mb-4
+              .input-group
+                %span.input-group-text.bg-light.border-end-0
+                  %i.bi.bi-shield-lock.text-muted
+                = f.input :password_confirmation,
+                  label: "パスワード確認",
+                  required: true,
+                  placeholder: "新しいパスワードを再入力",
+                  input_html: { autocomplete: "new-password", class: "form-control border-start-0" }
+            
+            .d-grid.gap-3.mt-4
+              %button.btn.btn-primary.btn-lg.rounded-3.py-3{type: "submit"}
+                %i.bi.bi-check-circle.me-2
+                パスワードを変更する
+
+        .card-footer.bg-light.text-center.py-3
+          - if controller_name != 'sessions'
+            = link_to new_session_path(resource_name), class: "text-decoration-none" do
+              %i.bi.bi-box-arrow-in-right.me-1
+              ログイン画面に戻る

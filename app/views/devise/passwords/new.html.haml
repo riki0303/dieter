@@ -1,11 +1,48 @@
-%h2 Forgot your password?
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email,
-      required: true,
-      autofocus: true,
-      input_html: { autocomplete: "email" }
-  .form-actions
-    = f.button :submit, "Send me reset password instructions"
-= render "devise/shared/links"
+.container.py-5
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card.border-0.shadow-lg.rounded-4.overflow-hidden
+        .card-header.bg-gradient.p-4.text-center{style: "background-color: #4e73df;"}
+          %h1.text-white.mb-0.fw-bold
+            %i.bi.bi-key-fill.me-2
+            パスワードをお忘れですか？
+        
+        .card-body.p-4.p-lg-5
+          .mb-4.text-center
+            %p.text-muted 登録したメールアドレスを入力してください。パスワード再設定用のリンクをお送りします。
+          
+          - if resource.errors.any?
+            .alert.alert-danger.mb-4
+              %h6.alert-heading
+                %i.bi.bi-exclamation-triangle-fill.me-2
+                入力内容にエラーがあります
+              %ul.mb-0.ps-3.mt-2
+                - resource.errors.full_messages.each do |msg|
+                  %li= msg
+        
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: "needs-validation", method: :post, novalidate: true}) do |f|
+            .mb-4
+              %label.text-muted{for: "email-input"}
+                %i.bi.bi-envelope.me-1
+                メールアドレス
+              = f.input :email,
+                required: false,
+                autofocus: true,
+                label: false,
+                input_html: { autocomplete: "email", class: "form-control rounded-3 mt-1", id: "email-input" }
+                
+            .d-grid.gap-3.mt-4
+              %button.btn.btn-primary.btn-md.rounded-3.py-2{type: "submit"}
+                %i.bi.bi-send.me-2
+                リセット手順を送信
+              
+              - if controller_name != 'sessions'
+                = link_to new_session_path(resource_name), class: "btn btn-outline-secondary rounded-3" do
+                  %i.bi.bi-box-arrow-in-right.me-1
+                  ログイン画面に戻る
+
+        .card-footer.bg-light.text-center.py-3
+          - if devise_mapping.registerable? && controller_name != 'registrations'
+            = link_to new_registration_path(resource_name), class: "text-decoration-none" do
+              %i.bi.bi-person-plus.me-1
+              アカウント登録がまだの方はこちら
