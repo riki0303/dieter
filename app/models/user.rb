@@ -17,8 +17,8 @@ class User < ApplicationRecord
   def withdraw
     ActiveRecord::Base.transaction do
       # 関連レコードを削除
-      fitlogs.destroy_all
-      profile&.destroy
+      fitlogs.destroy_all!
+      profile&.destroy!
 
       # ユーザーを論理削除
       discard
