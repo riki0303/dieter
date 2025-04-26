@@ -10,6 +10,6 @@ class UsersController < ApplicationController
   rescue => e
     # エラーハンドリング
     logger.error "user_id: #{current_user.id} の退会処理に失敗しました: #{e.message}"
-    redirect_to edit_user_registration_path, alert: "退会処理に失敗しました。"
+    redirect_to edit_user_registration_path, alert: '退会処理に失敗しました。'
   end
 end
