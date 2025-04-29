@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :fitlogs, dependent: :destroy
   has_one :profile, dependent: :destroy
 
+  validates :email, presence: true, uniqueness: true
+
   # deviceのメソッドをオーバーライド
   def active_for_authentication?
     super && !discarded?
