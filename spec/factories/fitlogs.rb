@@ -7,7 +7,7 @@ FactoryBot.define do
     body_age { 25 }
     memo { "今日のトレーニング記録" }
     record_at { Time.current }
-    
+
     # fitlogはuserに属しているため、関連付けが必要
     association :user
   end

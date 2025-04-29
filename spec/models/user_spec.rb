@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "バリデーション" do
     let!(:user) { build(:user) }
-    
+
     context '必要なパラメーターが登録されている場合' do
       it '有効であること' do
         expect(user).to be_valid
