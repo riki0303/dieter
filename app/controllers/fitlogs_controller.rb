@@ -8,6 +8,7 @@ class FitlogsController < ApplicationController
     @fitlog = current_user.fitlogs.build
   end
 
+  # If saving fails, re-renders the new fitlog form with an alert and HTTP status 422.
   def create
     @fitlog = current_user.fitlogs.build(fitlog_params)
     if @fitlog.save

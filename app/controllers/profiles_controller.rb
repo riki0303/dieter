@@ -8,6 +8,10 @@ class ProfilesController < ApplicationController
   def edit
     @profile = current_user.profile || current_user.build_profile
   end
+  ##
+  # Updates the current user's profile with permitted parameters.
+  #
+  # If the update succeeds, redirects to the profile page with a success notice. If it fails, re-renders the edit form with an alert and unprocessable entity status.
   def update
     @profile = current_user.profile || current_user.build_profile
     if @profile.update(profile_params)
