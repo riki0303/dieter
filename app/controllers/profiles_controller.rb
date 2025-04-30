@@ -11,9 +11,9 @@ class ProfilesController < ApplicationController
   def update
     @profile = current_user.profile || current_user.build_profile
     if @profile.update(profile_params)
-      redirect_to profile_path, notice: t('update.notice')
+      redirect_to profile_path, notice: t('profiles.update.notice')
     else
-      flash.now[:alert] = t('update.alert')
+      flash.now[:alert] = t('profiles.update.alert')
       render :edit, status: :unprocessable_entity
     end
   end
