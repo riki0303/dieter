@@ -1,0 +1,8 @@
+ja:
+  fitlogs:
+    create:
+        notice: '記録が保存出来ました'
+        alert: '記録の保存に失敗しました'
+    update:
+        notice: '記録が更新されました'
+        alert: '記録の更新に失敗しました'

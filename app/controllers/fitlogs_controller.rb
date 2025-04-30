@@ -11,9 +11,9 @@ class FitlogsController < ApplicationController
   def create
     @fitlog = current_user.fitlogs.build(fitlog_params)
     if @fitlog.save
-      redirect_to fitlogs_path, notice: t('create.notice')
+      redirect_to fitlogs_path, notice: t('fitlogs.create.notice')
     else
-      flash.now[:alert] = t('create.alert')
+      flash.now[:alert] = t('fitlogs.create.alert')
       render :new, status: :unprocessable_entity
     end
   end
